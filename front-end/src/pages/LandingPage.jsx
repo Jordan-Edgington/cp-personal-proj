@@ -30,8 +30,8 @@ function LandingPage() {
             <input type='text' className='border-2 rounded border-black m-1'></input>
           </div>
           <div>
-            <Button>Log In</Button>
-            <p>Don't have an account? Click <Link className='text-orange-900' to='signup/'>here</Link> to sign up.</p>
+            <Button className='bg-orange-900 border-2 border-black'>Log In</Button>
+            <p>Don't have an account? Click <Link className='text-orange-900 hover:underline' to='signup/'>here</Link> to sign up.</p>
           </div>
         </form>
       </div>

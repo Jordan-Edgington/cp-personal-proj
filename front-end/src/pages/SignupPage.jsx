@@ -3,7 +3,9 @@
 function SignupPage() {
 
   return (
-   <></>
+   <>
+   Sign up
+   </>
   )
 }
 

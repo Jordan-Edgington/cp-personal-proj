@@ -27,7 +27,7 @@ function SignupPage() {
           </div>
           <div className='flex flex-row justify-end mr-10'>
                 <p>Password</p>
-                <input type='text' className='border-2 rounded border-black m-1' onChange={(e)=>setPasswordInput(e.target.value)}></input>
+                <input type='password' className='border-2 rounded border-black m-1' onChange={(e)=>setPasswordInput(e.target.value)}></input>
           </div>
           <div>
                 <input type='submit' value='Sign Up' className='bg-orange-900 border-2 border-black rounded p-1 text-white'/>

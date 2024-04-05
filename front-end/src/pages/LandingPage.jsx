@@ -1,7 +1,24 @@
-import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
+import {useState} from 'react'
+import {api} from '../utilities.jsx'
 /* eslint-disable react/no-unescaped-entities */
 function LandingPage() {
+  const [emailInput, setEmailInput] = useState('')
+  const [passwordInput, setPasswordInput] = useState('')
+
+  const handleLoginForm = async(e) => {
+        e.preventDefault()
+        try {
+          const response = await api.post("users/login/",{email:emailInput, password:passwordInput})
+          console.log('heelo')
+          if (response.status === 200) {
+                console.log('successfully logged in, user info', response.data)
+          } 
+        } catch (error) {
+            console.error('Unable to log in. Improper credentials provided', error)
+            alert('Unable to log in. Improper credentials provided')
+      }
+    }
 
   return (
     <div className='grid grid-cols-2'>
@@ -20,17 +37,17 @@ function LandingPage() {
       </div>
       <div className='flex flex-col justify-center items-center text-center'>
         <p className='text-2xl mb-4'>Enter your information to log in</p>
-        <form className='flex flex-col w-1/2'>
+        <form className='flex flex-col w-1/2' onSubmit={handleLoginForm}>
           <div className='flex flex-row justify-end mr-10'>
             <p>Email</p>
-            <input type='text' className='border-2 rounded border-black m-1'></input>
+            <input type='text' className='border-2 rounded border-black m-1' onChange={(e)=>setEmailInput(e.target.value)}></input>
           </div>
           <div className='flex flex-row justify-end mr-10'>
             <p>Password</p>
-            <input type='text' className='border-2 rounded border-black m-1'></input>
+            <input type='password' className='border-2 rounded border-black m-1' onChange={(e)=>setPasswordInput(e.target.value)}></input>
           </div>
           <div>
-            <Button className='bg-orange-900 border-2 border-black'>Log In</Button>
+          <input type='submit' value='Log In' className='bg-orange-900 border-2 border-black rounded p-1 text-white'/>
             <p>Don't have an account? Click <Link className='text-orange-900 hover:underline' to='signup/'>here</Link> to sign up.</p>
           </div>
         </form>

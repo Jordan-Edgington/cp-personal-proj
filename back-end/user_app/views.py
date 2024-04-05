@@ -39,6 +39,7 @@ class Signup(APIView):
 class Login(APIView):
     def post(self, request):
         data = request.data.copy()
+        print(data)
         user = authenticate(username=data.get('email'),
                             password=data.get('password'))
         print('user:', user)
@@ -50,7 +51,10 @@ class Login(APIView):
                 {'Email': user.email, 'Display Name': user.display_name, 'Token': token[0].key}, status=HTTP_200_OK
             )
         else:
-            return Response('No user matching credentials', status=HTTP_400_BAD_REQUEST)
+            print('afiled')
+            return Response(
+                {'message': 'No user matching credentials'}, status=HTTP_400_BAD_REQUEST
+            )
 
 
 class TokenReq(APIView):

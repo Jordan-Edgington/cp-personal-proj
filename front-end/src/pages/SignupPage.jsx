@@ -1,16 +1,24 @@
 import { useState } from 'react'
 import { api } from '../utilities.jsx'
+import { useOutletContext } from 'react-router-dom'
 /* eslint-disable react/no-unescaped-entities */
 function SignupPage() {
       const [emailInput, setEmailInput] = useState('')
       const [displayNameInput, setDisplayNameInput] = useState('')
       const [passwordInput, setPasswordInput] = useState('')
 
+      const {user, setUser } = useOutletContext()
+
       const handleSignupForm = async(e) => {
             e.preventDefault()
             const response = await api.post("users/signup/",{email:emailInput, display_name:displayNameInput, password:passwordInput})
             if (response.status === 201) {
+                  const { Token } = response.data
                   console.log('successfully signed up, user info', response.data)
+                  localStorage.setItem("token", Token)
+                  api.defaults.headers.common["Authorization"] = `Token ${Token}`
+                  console.log('Added token to localstorage and auth header.')
+                  setUser({email:response.data.Email, display_name:response.data['Display Name']})
       }}
   return (
    <>

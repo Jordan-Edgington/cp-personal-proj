@@ -1,7 +1,16 @@
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
+import { api } from "@/utilities"
+import { useState } from "react"
 
-function NavBar() {
+function NavBar({user, setUser}) {
+
+  const handleLogOut = () => {
+    setUser(null)
+    localStorage.removeItem('token')
+    delete api.defaults.headers.common['Authorization']
+    console.log('logging out')
+  }
 
   return (
     <div className='bg-gradient-to-br from-orange-500 to-orange-900 w-full pt-5 pb-5 grid grid-cols-3 border-green-900 border-b-2'>
@@ -12,7 +21,9 @@ function NavBar() {
       </div>
       <div className='flex justify-end mr-8' >
         {/* If Logged In, show these (need to add show the display_name of the user logged in)*/}
-        <Button className='bg-invisible hover:text-red-900 hover:bg-invisible md:ml-6 md:mr-6 text-xl'>Log Out</Button>
+        {console.log(user)}
+        {user ? <Button className='bg-invisible hover:text-red-900 hover:bg-invisible md:ml-6 md:mr-6 text-xl'>{user['display_name']}</Button> : null}
+        {user ? <Button className='bg-invisible hover:text-red-900 hover:bg-invisible md:ml-6 md:mr-6 text-xl' onClick={handleLogOut}>Log Out</Button> : null}
       </div>
     </div>
   )

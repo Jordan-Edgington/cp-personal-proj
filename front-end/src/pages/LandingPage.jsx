@@ -1,18 +1,24 @@
 import { Link } from "react-router-dom"
 import {useState} from 'react'
 import {api} from '../utilities.jsx'
+import { useOutletContext } from "react-router-dom"
 /* eslint-disable react/no-unescaped-entities */
 function LandingPage() {
   const [emailInput, setEmailInput] = useState('')
   const [passwordInput, setPasswordInput] = useState('')
+  const {user, setUser} = useOutletContext()
 
   const handleLoginForm = async(e) => {
         e.preventDefault()
         try {
           const response = await api.post("users/login/",{email:emailInput, password:passwordInput})
-          console.log('heelo')
           if (response.status === 200) {
-                console.log('successfully logged in, user info', response.data)
+            const { Token } = response.data
+            console.log('successfully logged in, user info', response.data)
+            api.defaults.headers.common["Authorization"] = `Token ${Token}`
+            localStorage.setItem("token", Token)
+            console.log('Added token to localstorage and auth header.')
+            setUser({email:response.data.Email, display_name:response.data['Display Name']})
           } 
         } catch (error) {
             console.error('Unable to log in. Improper credentials provided', error)

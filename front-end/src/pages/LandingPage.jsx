@@ -36,21 +36,10 @@ function LandingPage() {
     }
 
   return (
-    <div className='grid grid-cols-2'>
-      <div className='h-full w-full p-12 justify-center items-center'>
-        <p className='text-center text-2xl'>Welcome to Munch Memo!
-          <br/><br/>
-          
-          Track Your Meals & Calories: Stay on top of your dietary goals effortlessly. Log your meals and monitor your caloric intake with ease.
-          <br/>
-          Share Your Culinary Adventures: Connect with friends and fellow foodies. Share your favorite meals and culinary discoveries, fostering a community of delicious inspiration.
-          <br/>
-          Get Meal Suggestions: Can't decide what to eat? Let Munch Memo generate meal ideas tailored to your preferences, ensuring every bite is enjoyable.
-          <br/>
-          Join Munch Memo today and turn your eating habits into a delightful journey!
-        </p>
-      </div>
-      <div className='flex flex-col justify-center items-center text-center'>
+    <div className='flex flex-col justify-center items-center'>
+      <div className='flex flex-col h-full w-full p-12 justify-center items-center '>
+        <p className='text-center text-2xl font-bold'>Welcome to Munch Memo!</p>
+        <div className='flex flex-col justify-center items-center text-center border-black border-2 rounded min-w-min sm:w-2/3 md:w-5/12 m-4'>
         <p className='text-2xl mb-4'>Enter your information to log in</p>
         <form className='flex flex-col w-1/2' onSubmit={handleLoginForm}>
           <div className='flex flex-row justify-end mr-10'>
@@ -67,6 +56,20 @@ function LandingPage() {
           </div>
         </form>
       </div>
+          <br/><br/>
+          <ul className='list-disc'>
+          <li>Track Your Meals & Calories: Stay on top of your dietary goals effortlessly. Log your meals and monitor your caloric intake with ease.</li>
+          <br/>
+          <li>Share Your Culinary Adventures: Connect with friends and fellow foodies. Share your favorite meals and culinary discoveries, fostering a community of delicious inspiration.</li>
+          <br/>
+          <li>Get Meal Suggestions: Can't decide what to eat? Let Munch Memo generate meal ideas tailored to your preferences, ensuring every bite is enjoyable.</li>
+          </ul>
+          <br/>
+          <p className='text-center text-2xl'>Join Munch Memo today and turn your eating habits into a delightful journey!</p>
+
+
+      </div>
+      
     </div>
   )
 }

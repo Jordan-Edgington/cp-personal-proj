@@ -1,12 +1,21 @@
 import { Link } from "react-router-dom"
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {api} from '../utilities.jsx'
-import { useOutletContext } from "react-router-dom"
+import { useOutletContext, useNavigate } from "react-router-dom"
 /* eslint-disable react/no-unescaped-entities */
 function LandingPage() {
   const [emailInput, setEmailInput] = useState('')
   const [passwordInput, setPasswordInput] = useState('')
   const {user, setUser} = useOutletContext()
+  const navigate = useNavigate(); // Initialize navigate using useNavigate
+  
+  useEffect(() => {
+    if (user) {
+      navigate('/feed/');
+    }
+    else {
+      navigate('/')}
+  }, [user])
 
   const handleLoginForm = async(e) => {
         e.preventDefault()

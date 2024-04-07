@@ -6,7 +6,7 @@ import SignupPage from './pages/SignupPage';
 import UserFeedPage from "./pages/UserFeedPage";
 import MealTrackerPage from "./pages/MealTracker";
 import MealMakerPage from "./pages/MealMakerPage";
-
+import AccountInfoPage from "./pages/AccountInfoPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,6 +37,10 @@ const router = createBrowserRouter([
         path: 'test/',
         element: <testPage />
       },
+      {
+        path: 'account/',
+        element: <AccountInfoPage />
+      }
     ],
   },
 ]);

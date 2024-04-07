@@ -1,15 +1,18 @@
 import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { api } from "@/utilities"
 import { useState } from "react"
 
 function NavBar({user, setUser}) {
+  const navigate = useNavigate()
 
   const handleLogOut = () => {
     setUser(null)
     localStorage.removeItem('token')
     delete api.defaults.headers.common['Authorization']
     console.log('logging out')
+    navigate('/')
+
   }
 
   return (
@@ -22,7 +25,7 @@ function NavBar({user, setUser}) {
       <div className='flex justify-end mr-8' >
         {/* If Logged In, show these (need to add show the display_name of the user logged in)*/}
         {console.log(user)}
-        {user ? <Button className='bg-invisible hover:text-red-900 hover:bg-invisible md:ml-6 md:mr-6 text-xl'>{user['display_name']}</Button> : null}
+        {user ? <Link to='/account/'><Button className='bg-invisible hover:text-red-900 hover:bg-invisible md:ml-6 md:mr-6 text-xl'>{user['display_name']}</Button></Link> : null}
         {user ? <Button className='bg-invisible hover:text-red-900 hover:bg-invisible md:ml-6 md:mr-6 text-xl' onClick={handleLogOut}>Log Out</Button> : null}
       </div>
     </div>

@@ -39,7 +39,7 @@ function LandingPage() {
     <div className='flex flex-col justify-center items-center'>
       <div className='flex flex-col h-full w-full p-12 justify-center items-center '>
         <p className='text-center text-2xl font-bold'>Welcome to Munch Memo!</p>
-        <div className='flex flex-col justify-center items-center text-center border-black border-2 rounded min-w-min sm:w-2/3 md:w-5/12 m-4'>
+        <div className='flex flex-col justify-center items-center text-center min-w-min sm:w-2/3 md:w-5/12 m-4'>
         <p className='text-2xl mb-4'>Enter your information to log in</p>
         <form className='flex flex-col w-1/2' onSubmit={handleLoginForm}>
           <div className='flex flex-row justify-end mr-10'>

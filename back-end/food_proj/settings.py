@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'food_app',
     'meal_app',
     'review_app',
-    'user_app'
+    'user_app',
+    'ai_app'
 ]
 
 REST_FRAMEWORK = {

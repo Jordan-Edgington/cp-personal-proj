@@ -12,7 +12,7 @@ function UserFeedPage() {
     }}, [user])
     
     return (
-     <></>
+     <>Feed</>
     )
   }
   

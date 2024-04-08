@@ -7,6 +7,7 @@ import UserFeedPage from "./pages/UserFeedPage";
 import MealTrackerPage from "./pages/MealTracker";
 import MealMakerPage from "./pages/MealMakerPage";
 import AccountInfoPage from "./pages/AccountInfoPage";
+import NewMealPage from "./pages/NewMealPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: 'account/',
         element: <AccountInfoPage />
+      },
+      {
+        path: 'meals/add/',
+        element: <NewMealPage />
       }
     ],
   },

@@ -51,7 +51,7 @@ class Login(APIView):
                 {'Email': user.email, 'Display Name': user.display_name, 'Token': token[0].key}, status=HTTP_200_OK
             )
         else:
-            print('afiled')
+            print('failed')
             return Response(
                 {'message': 'No user matching credentials'}, status=HTTP_400_BAD_REQUEST
             )

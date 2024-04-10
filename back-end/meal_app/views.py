@@ -31,7 +31,8 @@ from meal_app.models import Meal
 class MealView(TokenReq):
     def get(self, request):
         data = request.data.copy()
-        meals = MealSerializer(Meal.objects.all(), many=True)
+        meals = MealSerializer(Meal.objects.filter(
+            user=request.user), many=True)
         if meals:
             return Response(meals.data, status=HTTP_200_OK)
         return Response({"Failure": "Could not get meals"}, status=HTTP_400_BAD_REQUEST)

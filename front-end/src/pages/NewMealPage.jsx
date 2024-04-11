@@ -26,7 +26,7 @@ function NewMealPage() {
     const handleSearch = async(e)=> {
         if (e){
         try{
-            const response = await api.post(`/foods/nutrition/${e}/`)
+            const response = await api.post(`foods/nutrition/${e}/`)
             setSearchResults(response.data.foods)}
         catch (error) {
             console.error('Error fetching food:', error);
@@ -64,7 +64,8 @@ function NewMealPage() {
     // }
     const handleAddMeal = async() => {
         try{
-            const response = api.post('/meals/', {foods: myFoods})}
+            console.log(myFoods)
+            const response = api.post('meals/', {foods: myFoods})}
         catch (error) {
             console.error('Error creating meal:', error);
         }

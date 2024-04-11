@@ -1,13 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { api } from '../utilities.jsx'
-import { useOutletContext } from 'react-router-dom'
+import { useOutletContext, useNavigate } from 'react-router-dom'
 /* eslint-disable react/no-unescaped-entities */
 function SignupPage() {
       const [emailInput, setEmailInput] = useState('')
       const [displayNameInput, setDisplayNameInput] = useState('')
       const [passwordInput, setPasswordInput] = useState('')
-
       const {user, setUser } = useOutletContext()
+
+      const navigate = useNavigate()
 
       const handleSignupForm = async(e) => {
             e.preventDefault()
@@ -20,6 +21,10 @@ function SignupPage() {
                   console.log('Added token to localstorage and auth header.')
                   setUser({email:response.data.Email, display_name:response.data['Display Name']})
       }}
+      useEffect(() => {
+            if (!user) {
+              navigate('/')
+            }}, [user])
   return (
    <>
    <div className='flex flex-col justify-center items-center text-center w-1/2 m-24'>

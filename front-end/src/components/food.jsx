@@ -11,7 +11,7 @@ import {
   } from "@/components/ui/dialog"
 
 
-function Food({ food_obj, deleteFood, parent, handleSave, setFoodServings }) {
+function Food({ food_obj, deleteFood, parent, handleSave, setFoodServings, grandparent }) {
     const [food, setFood] = useState({});
     const [servings, setServings] = useState(null)
 
@@ -37,13 +37,15 @@ function Food({ food_obj, deleteFood, parent, handleSave, setFoodServings }) {
 
   return (
     <div className='border-black border-2'>
-        {food && parent=='NewMealPage' ? (<div>
+        {food && parent=='NewMealPage' || grandparent=='feed' ? (<div>
                 <p>Food Name: {food.name}</p><p>Serving Size: {food.serving}</p><p>Servings: {food_obj.servings}</p><p>Calories: {food.calories * food_obj.servings}</p>
                 </div>) 
             :null
         }
         
-        {food && parent=='MealPage' ? 
+
+
+        {food && parent=='MealPage' && grandparent=='MealTracker' ? 
             (<div>
                 <p>Food Name: {food.name}</p><p>Serving Size: {food.serving}</p><p>Servings: {food_obj.servings}</p><p>Calories: {food.calories * food_obj.servings}</p>
                 <Dialog>

@@ -1,8 +1,10 @@
+from django.shortcuts import get_object_or_404
 from django.core.exceptions import ValidationError
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from user_app.views import TokenReq
 from food_proj.settings import env
+from .models import Food
 import requests
 from requests_oauth2client import *
 from rest_framework.status import (
@@ -69,3 +71,10 @@ class FatSecretFoodSearch(TokenReq):
                     'food_id'), 'food_name': food_data.get("food_name")}})
         print(new_foods_response)
         return Response(new_foods_response, status=HTTP_200_OK)
+
+
+class AFood(TokenReq):
+    def delete(self, request, food_id):
+        food = get_object_or_404(Food, id=food_id)
+        food.delete()
+        return Response(status=HTTP_204_NO_CONTENT)

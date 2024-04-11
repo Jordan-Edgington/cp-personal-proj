@@ -1,6 +1,17 @@
 import { api } from "@/utilities"
 import { useState, useEffect } from "react"
-function Food({ food_obj }) {
+import { Button } from "./ui/button"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+  } from "@/components/ui/dialog"
+
+
+function Food({ food_obj, deleteFood, parent }) {
     const [food, setFood] = useState({});
 
     useEffect(() => {
@@ -17,10 +28,28 @@ function Food({ food_obj }) {
 
         console.log('Food Obj: ', food_obj);
         handleGetFoodFromAPI();
-    }, [food_obj.api_food_id]); // Add food_obj.api_food_id as dependency
+    }, [food_obj.api_food_id]); 
+
+
+
+
+
   return (
     <div className='border-black border-2'>
-        {food ? (<div><p>Food Name: {food.name}</p><p>Serving Size: {food.serving}</p><p>Servings: {food_obj.servings}</p><p>Calories: {food.calories * food_obj.servings}</p></div>) :null}
+        {food && parent=='NewMealPage' ? (<div>
+                <p>Food Name: {food.name}</p><p>Serving Size: {food.serving}</p><p>Servings: {food_obj.servings}</p><p>Calories: {food.calories * food_obj.servings}</p>
+                </div>) 
+            :null
+        }
+        
+        {food && parent=='MealPage' ? 
+            (<div>
+                <p>Food Name: {food.name}</p><p>Serving Size: {food.serving}</p><p>Servings: {food_obj.servings}</p><p>Calories: {food.calories * food_obj.servings}</p>
+                <Button>Edit Food</Button>
+                <Button onClick={()=>{deleteFood(food_obj)}}>Delete Food</Button>
+            </div>) 
+            :null
+        }
 
     </div>
   )

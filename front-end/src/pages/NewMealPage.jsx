@@ -76,7 +76,7 @@ function NewMealPage() {
        
 
         <div className="flex flex-col items-center p-8 bg-gradient-to-br from-white to-gray-200 rounded-lg shadow-md relative m-4 w-full">
-        {myFoods.length ? <ul>{myFoods.map((food, idx)=><li key={idx}><Food key={food.id} food_obj={food} /></li>)}<Button onClick={handleAddMeal}>Add Meal</Button></ul> : <p>testing</p>}
+        {myFoods.length ? <ul>{myFoods.map((food, idx)=><li key={idx}><Food key={food.id} food_obj={food} parent='NewMealPage' /></li>)}<Button onClick={handleAddMeal}>Add Meal</Button></ul> : <p>Search for foods...</p>}
         <div className='flex flex-col items-center'>
             <input type='text' className='border-2 rounded border-gray-300' onChange={(e)=>{debouncedHandleSearch(e.target.value)}}></input>
             <ul className='p-1'>

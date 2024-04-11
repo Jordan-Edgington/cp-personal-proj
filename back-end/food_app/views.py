@@ -74,6 +74,14 @@ class FatSecretFoodSearch(TokenReq):
 
 
 class AFood(TokenReq):
+    def post(self, request, food_id):
+        print(request.data)
+        food = get_object_or_404(Food, id=food_id)
+        new_servings = request.data['servings']
+        food.servings = new_servings
+        food.save()
+        return Response(status=HTTP_204_NO_CONTENT)
+
     def delete(self, request, food_id):
         food = get_object_or_404(Food, id=food_id)
         food.delete()

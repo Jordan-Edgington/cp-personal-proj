@@ -1,10 +1,10 @@
 import './App.css'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLoaderData } from 'react-router-dom'
 import NavBar from './components/navbar'
 import { useState, useEffect } from 'react'
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(useLoaderData)
 
   useEffect(() => {
     console.log('User updated:', user);

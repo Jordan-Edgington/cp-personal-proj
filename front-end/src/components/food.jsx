@@ -11,8 +11,9 @@ import {
   } from "@/components/ui/dialog"
 
 
-function Food({ food_obj, deleteFood, parent }) {
+function Food({ food_obj, deleteFood, parent, handleSave, setFoodServings }) {
     const [food, setFood] = useState({});
+    const [servings, setServings] = useState(null)
 
     useEffect(() => {
         const handleGetFoodFromAPI = async () => {
@@ -45,7 +46,22 @@ function Food({ food_obj, deleteFood, parent }) {
         {food && parent=='MealPage' ? 
             (<div>
                 <p>Food Name: {food.name}</p><p>Serving Size: {food.serving}</p><p>Servings: {food_obj.servings}</p><p>Calories: {food.calories * food_obj.servings}</p>
-                <Button>Edit Food</Button>
+                <Dialog>
+                    <DialogTrigger><Button>Edit Food</Button></DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                        <DialogTitle>Edit Servings:</DialogTitle>
+                        <DialogDescription>
+                            How many servings?
+                            <form onSubmit={(e) => { handleSave(e, food_obj) }}>
+                                <input className='border-2 rounded border-gray-300 mr-1' onChange={(e)=>{setFoodServings(e.target.value)}}type='number'></input>
+                                <input type='submit' value='Save' className='border-2 rounded border-gray-700 bg-gradient-to-br from-orange-500 to-orange-900 text-white'></input>
+                            </form>
+                        </DialogDescription>
+                        </DialogHeader>
+                    </DialogContent>
+                    </Dialog>
+                
                 <Button onClick={()=>{deleteFood(food_obj)}}>Delete Food</Button>
             </div>) 
             :null

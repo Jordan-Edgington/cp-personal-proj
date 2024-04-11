@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import {useState, useEffect} from 'react'
 import {api} from '../utilities.jsx'
 import { useOutletContext, useNavigate } from "react-router-dom"
+
 /* eslint-disable react/no-unescaped-entities */
 function LandingPage() {
   const [emailInput, setEmailInput] = useState('')

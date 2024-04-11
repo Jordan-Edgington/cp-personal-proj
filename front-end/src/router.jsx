@@ -8,10 +8,12 @@ import MealTrackerPage from "./pages/MealTracker";
 import MealMakerPage from "./pages/MealMakerPage";
 import AccountInfoPage from "./pages/AccountInfoPage";
 import NewMealPage from "./pages/NewMealPage";
+import { userConfirmation } from "./utilities";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    loader: userConfirmation,
     children: [
       {
         // If user is logged in, this should redirect to user's feed.

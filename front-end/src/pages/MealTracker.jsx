@@ -19,8 +19,6 @@ function MealTrackerPage() {
       const updatedMeals = meals.filter(meal => meal.id !== id);
       setMeals(updatedMeals)
       console.log("meal deleted")
-
-
   }
 
     useEffect(()=>{

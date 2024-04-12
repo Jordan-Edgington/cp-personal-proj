@@ -16,18 +16,21 @@ function NavBar({user, setUser}) {
   }
 
   return (
-    <div className='flex flex-col bg-gradient-to-br from-orange-500 to-orange-900 h-full pt-5 pb-5 border-black border-b-2'>
+    <div className='flex flex-col bg-red-900 h-full pt-5 pb-5 border-black border-r-4 items-center'>
 
-        {!user ? <Link to='/'><Button className='bg-invisible hover:text-red-900 hover:bg-invisible ml-2m lg:ml-6 lg:mr-6 text-sm sm:text-base md:text-2xl'>Munch Memo</Button></Link> : <Link to='/feed/'><Button className='bg-invisible hover:text-red-900 hover:bg-invisible ml-2m lg:ml-6 lg:mr-6 text-sm sm:text-base md:text-2xl'>Munch Memo</Button></Link>}
-        {user ? <Link to='/meals/'><Button className='bg-invisible hover:text-red-900 hover:bg-invisible lg:ml-6 lg:mr-6 text-sm sm:text-base md:text-xl'>Meal Tracker</Button></Link> : null}
-        {user ? <Link to='/mealmaker/'><Button className='bg-invisible hover:text-red-900 hover:bg-invisible lg:ml-6 lg:mr-6 text-sm sm:text-base md:text-xl'>Meal Maker</Button></Link> : null}
+        {!user ? 
+          <Link to='/' className='w-full'><Button className='text-2xl w-full bg-invisible hover:bg-invisible hover:text-black'>Munch Memo</Button></Link> : 
+          <Link to='/feed/' className='w-full'><Button className='text-2xl w-full bg-invisible hover:bg-invisible hover:text-black'>Munch Memo</Button></Link>
+        }
+        {user ? <Link to='/meals/' className='w-full'><Button className='text-xl w-full bg-invisible hover:bg-invisible hover:text-black'>My Meals</Button></Link> : null}
+        {user ? <Link to='/mealmaker/' className='w-full'><Button className='text-xl w-full bg-invisible hover:bg-invisible hover:text-black'>AI Meal Maker</Button></Link> : null}
 
 
-        {/* If Logged In, show these (need to add show the display_name of the user logged in)*/}
         {console.log(user)}
-        {user ? <Link to='/account/'><Button className='bg-invisible hover:text-red-900 hover:bg-invisible md:ml-6 md:mr-6 text-xl'>{user['display_name']}</Button></Link> : null}
-        {user ? <Button className='bg-invisible hover:text-red-900 hover:bg-invisible md:ml-6 md:mr-6 text-xl' onClick={handleLogOut}>Log Out</Button> : null}
-
+        <div className='flex flex-col w-full mt-auto'>
+        {user ? <Link to='/account/' className='w-full'><Button className='text-xl mt-auto w-full bg-invisible hover:bg-invisible hover:text-black'>{user['display_name']}</Button></Link> : null}
+        {user ? <Button className='text-xl mt-2 w-full bg-invisible hover:bg-invisible hover:text-black' onClick={handleLogOut}>Log Out</Button> : null}
+        </div>
     </div>
   )
 }

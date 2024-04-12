@@ -20,6 +20,7 @@ from datetime import datetime
 class Review(TokenReq):
     def post(self, request):
         '''
+        POST to 'review/'
             {
                 message: 'insert text',
                 meal_id: 'insert meal id'

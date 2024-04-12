@@ -37,26 +37,27 @@ function LandingPage() {
     }
 
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <div className='flex flex-col justify-center items-center h-full overflow-hidden mb-0 pb-0'>
       <div className='flex flex-col h-full w-full p-12 justify-center items-center '>
-        <p className='text-center text-2xl font-bold'>Welcome to Munch Memo!</p>
+        <p className='text-center text-3xl font-bold'>Welcome to Munch Memo!</p>
         <div className='flex flex-col justify-center items-center text-center min-w-min sm:w-2/3 md:w-5/12 m-4'>
         <p className='text-2xl mb-4'>Enter your information to log in</p>
-        <form className='flex flex-col w-1/2' onSubmit={handleLoginForm}>
-          <div className='flex flex-row justify-end mr-10'>
-            <p>Email</p>
-            <input type='text' className='border-2 rounded border-black m-1' onChange={(e)=>setEmailInput(e.target.value)}></input>
-          </div>
-          <div className='flex flex-row justify-end mr-10'>
-            <p>Password</p>
-            <input type='password' className='border-2 rounded border-black m-1' onChange={(e)=>setPasswordInput(e.target.value)}></input>
-          </div>
-          <div>
-          <input type='submit' value='Log In' className='bg-orange-900 border-2 border-black rounded p-1 text-white'/>
-            <p>Don't have an account? Click <Link className='text-orange-900 hover:underline' to='signup/'>here</Link> to sign up.</p>
-          </div>
-        </form>
-      </div>
+          <form className='flex flex-col w-1/2' onSubmit={handleLoginForm}>
+            <div className='flex flex-row justify-end mr-10'>
+              <p>Email</p>
+              <input type='text' className='border-2 rounded border-black m-1' onChange={(e)=>setEmailInput(e.target.value)}></input>
+            </div>
+            <div className='flex flex-row justify-end mr-10'>
+              <p>Password</p>
+              <input type='password' className='border-2 rounded border-black m-1' onChange={(e)=>setPasswordInput(e.target.value)}></input>
+            </div>
+            <div>
+              <input type='submit' value='Log In' className='bg-red-900 border-2 border-black rounded p-1 text-white'/>
+              <p>Don't have an account? Click <Link className='text-red-900 hover:underline' to='signup/'>here</Link> to sign up.</p>
+            </div>
+          </form>
+        </div>
+        <div className='w-1/2'>
           <br/><br/>
           <ul className='list-disc'>
           <li>Track Your Meals & Calories: Stay on top of your dietary goals effortlessly. Log your meals and monitor your caloric intake with ease.</li>
@@ -67,6 +68,7 @@ function LandingPage() {
           </ul>
           <br/>
           <p className='text-center text-2xl'>Join Munch Memo today and turn your eating habits into a delightful journey!</p>
+        </div>
 
 
       </div>

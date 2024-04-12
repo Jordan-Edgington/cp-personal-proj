@@ -32,18 +32,18 @@ function SignupPage() {
         <form className='flex flex-col w-1/2' onSubmit={handleSignupForm}>
             <div className='flex flex-row justify-end mr-10'>
                 <p>Display Name</p>
-                <input type='text' className='border-2 rounded border-black m-1' onChange={(e)=>setDisplayNameInput(e.target.value)}></input>
+                <input type='text' className='border-2 rounded border-black m-1 focus:border-red-700' onChange={(e)=>setDisplayNameInput(e.target.value)}></input>
             </div>
           <div className='flex flex-row justify-end mr-10'>
                 <p>Email</p>
-                <input type='text' className='border-2 rounded border-black m-1' onChange={(e)=>setEmailInput(e.target.value)}></input>
+                <input type='text' className='border-2 rounded border-black m-1 focus:border-red-700' onChange={(e)=>setEmailInput(e.target.value)}></input>
           </div>
           <div className='flex flex-row justify-end mr-10'>
                 <p>Password</p>
-                <input type='password' className='border-2 rounded border-black m-1' onChange={(e)=>setPasswordInput(e.target.value)}></input>
+                <input type='password' className='border-2 rounded border-black m-1 focus:border-red-700' onChange={(e)=>setPasswordInput(e.target.value)}></input>
           </div>
           <div>
-                <input type='submit' value='Sign Up' className='bg-orange-900 border-2 border-black rounded p-1 text-white'/>
+                <input type='submit' value='Sign Up' className='bg-orange-900 border-2 border-black rounded p-1 text-white focus:border-red-700'/>
           </div>
         </form>
       </div>

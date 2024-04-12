@@ -45,6 +45,7 @@ function NewMealPage() {
     //{api_food_id:num, servings:num}
     const handleAddFood = (e, food) => {
         e.preventDefault()
+        e.target.reset()
         setMyFoods([...myFoods, {api_food_id: food.food_id, servings: servings}])
         console.log({api_food_id: food.food_id, servings: servings})    
     }
@@ -65,7 +66,8 @@ function NewMealPage() {
     const handleAddMeal = async() => {
         try{
             console.log(myFoods)
-            const response = api.post('meals/', {foods: myFoods})}
+            const response = api.post('meals/', {foods: myFoods})
+            setMyFoods([])}
         catch (error) {
             console.error('Error creating meal:', error);
         }
@@ -73,33 +75,35 @@ function NewMealPage() {
     console.log('MY FOODS: ',myFoods)
 
     return (
-    <div className='flex flex-col w-full items-center'>
-       
-
+    <div className='flex flex-col h-full w-full items-center'>
+        <p className='mb-auto ml-auto'>Data provided by the <a className='text-red-900 underline' href='https://www.fatsecret.com/'>FatSecret Platform</a>.</p>
         <div className="flex flex-col items-center p-8 bg-gradient-to-br from-white to-gray-200 rounded-lg shadow-md relative m-4 w-full">
-        {myFoods.length ? <ul>{myFoods.map((food, idx)=><li key={idx}><Food key={food.id} food_obj={food} parent='NewMealPage' /></li>)}<Button onClick={handleAddMeal}>Add Meal</Button></ul> : <p>Search for foods...</p>}
-        <div className='flex flex-col items-center'>
-            <input type='text' className='border-2 rounded border-gray-300' onChange={(e)=>{debouncedHandleSearch(e.target.value)}}></input>
-            <ul className='p-1'>
-                {searchResults ? searchResults.map((foodFromSearch, idx) => 
-                <li className='hover:bg-orange-200 mt-1'  key={searchResults.indexOf(foodFromSearch)}>
-                     <Dialog>
-                        <DialogTrigger><FoodSearch food={foodFromSearch[idx+1]}/></DialogTrigger>
-                        <DialogContent>
-                            <DialogHeader>
-                            <DialogTitle>Add Food: {foodFromSearch[idx+1].food_name}</DialogTitle>
-                            <DialogDescription>
-                                How many servings?
-                                <form onSubmit={(e) => { handleAddFood(e, foodFromSearch[idx+1]) }}>
-                                    <input className='border-2 rounded border-gray-300 mr-1' onChange={(e)=>{setServings(e.target.value)}}type='number'></input>
-                                    <input type='submit' value='add' className='border-2 rounded border-gray-700 bg-gradient-to-br from-orange-500 to-orange-900 text-white'></input>
-                                </form>
-                            </DialogDescription>
-                            </DialogHeader>
-                        </DialogContent>
-                    </Dialog></li>) : null}
-            </ul>
-        </div>
+            {myFoods.length ? <ul className='flex flex-row items-center justify-center'>{myFoods.map((food, idx)=><li key={idx}><Food key={food.id} food_obj={food} parent='NewMealPage' /></li>)}<Button className='bg-gradient-to-r from-red-700 to-red-900 border-2 border-black' onClick={handleAddMeal}>Add Meal</Button></ul> 
+            :   <div className='flex flex-col items-center justify-center text-center'>
+                    <p className='text-2xl italic font-bold'>The Store</p><p>Search for foods...</p>
+                </div>}
+            <div className='flex flex-col items-center'>
+                <input type='text' className='border-2 rounded border-gray-300 focus:border-red-700' onChange={(e)=>{debouncedHandleSearch(e.target.value)}}></input>
+                <ul className='p-1'>
+                    {searchResults ? searchResults.map((foodFromSearch, idx) => 
+                    <li className='hover:bg-yellow-100 mt-1'  key={searchResults.indexOf(foodFromSearch)}>
+                        <Dialog>
+                            <DialogTrigger><FoodSearch food={foodFromSearch[idx+1]}/></DialogTrigger>
+                            <DialogContent>
+                                <DialogHeader>
+                                <DialogTitle>Add Food: {foodFromSearch[idx+1].food_name}</DialogTitle>
+                                <DialogDescription>
+                                    How many servings?
+                                    <form onSubmit={(e) => { handleAddFood(e, foodFromSearch[idx+1]) }}>
+                                        <input className='border-2 rounded border-gray-300 mr-1 focus:border-red-700' onChange={(e)=>{setServings(e.target.value)}}type='number'></input>
+                                        <input type='submit' value='add' className='border-2 rounded border-gray-700 bg-gradient-to-br from-red-500 to-red-900 text-white'></input>
+                                    </form>
+                                </DialogDescription>
+                                </DialogHeader>
+                            </DialogContent>
+                        </Dialog></li>) : null}
+                </ul>
+            </div>
         </div>
     </div>
     )

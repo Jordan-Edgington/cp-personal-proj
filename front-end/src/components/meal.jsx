@@ -61,17 +61,25 @@ function Meal({meal, deleteMeal, parent, grandparent, addReview}) {
 
 
   return (
-    <div className='border-black border-2'>
-        <p>Meal ID: {meal.id}</p>
-        {parent==='feed' ? <p>User: {mealUser['display_name']}</p> : null }
-        <p>Date/Time of Meal: {meal.meal_date_time}</p>
+    <div className='flex flex-col items-center w-full'>
+      <div className='border-black border-2 w-2/3 rounded bg-white bg-opacity-50'>
+        {parent==='feed' ? <p className='italic font-bold ml-1'>{mealUser['display_name']}</p> : null }
+        <div className='flex flex-row items-center'>
+          <p className='ml-1'>{meal.meal_date_time}</p>
+          {parent==='feed' ? null : <Button className='bg-invisible m-1 text-black hover:bg-red-700 ml-auto' onClick={()=>{deleteMeal(meal.id)}}>x</Button>}
+        </div>
         <ul>
             {foods ? foods.map(food_item => <Food key={food_item.id} food_obj={food_item} deleteFood={deleteFood} handleSave={handleSave} setFoodServings={setFoodServings} parent='MealPage' grandparent={grandparent} />): null}
         </ul>
-        {parent==='feed' ? null : <Button onClick={()=>{deleteMeal(meal.id)}}>delete</Button>}
-        {parent==='feed' ? <form onSubmit={(e)=>{addReview(e, message, meal.id)}}><input type='text' onChange={(e)=>{setMessage(e.target.value)}}></input><input type='submit' value='>>' className='m-1 p-1 border-2 rounded border-gray-700 bg-gradient-to-br from-orange-500 to-orange-900 text-white'></input></form>: null}
+        
+        {parent==='feed' ? 
+          <form className='flex justify-center' onSubmit={(e)=>{addReview(e, message, meal.id)}}>
+              <input className='border-red-900 border-2 m-1 rounded w-2/3 pl-1' placeholder="Add a Comment" type='text' onChange={(e)=>{setMessage(e.target.value)}}></input>
+              <input type='submit' value='>>'  className='m-1 p-1 border-2 rounded border-black bg-gradient-to-r from-red-900 to-red-800 text-white'></input>
+          </form>
+        : null}
         {reviews && parent==='feed' ? reviews.map((review_item, idx) => <Review key={idx} review={review_item}/>) : null }
-
+        </div>
     </div>
   )
 }

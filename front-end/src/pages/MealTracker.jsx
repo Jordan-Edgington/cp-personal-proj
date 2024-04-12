@@ -27,13 +27,16 @@ function MealTrackerPage() {
       getMeals()
     },[])
     return (
-      <>
-      <p>My Meals</p>
-      <ul>{meals.map(meal => (<li key={meal.id}><Meal meal={meal} deleteMeal={handleDeleteMeal} grandparent='MealTracker'/></li>))}
-      </ul>
-      
-        <Link to='/meals/add/'><Button className='bg-gradient-to-br from-orange-900 to-orange-500 border-2 border-black text-white rounded px-4 py-2 hover:bg-orange-700 focus:outline-none focus:bg-orange-700'>Add a Meal</Button></Link>
-     </>
+      <div className='flex flex-col items-center'>
+          <p className='italic font-bold text-2xl'>My Meals</p>
+          <Link to='/meals/add/'><Button className='mb-2 mt-2 bg-gradient-to-br from-red-900 to-red-700 border-2 border-black text-white rounded px-4 py-2 hover:bg-orange-700 focus:outline-none focus:bg-orange-700'>Add a Meal</Button></Link>
+          <div className='w-full grid grid-cols-1'>
+          <ul>
+            {meals.map(meal => (<li key={meal.id}><Meal meal={meal} deleteMeal={handleDeleteMeal} grandparent='MealTracker'/></li>))}
+          </ul>
+          
+        </div>
+      </div>
     )
   }
   

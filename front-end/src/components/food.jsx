@@ -36,9 +36,9 @@ function Food({ food_obj, deleteFood, parent, handleSave, setFoodServings, grand
 
 
   return (
-    <div className='border-black border-2'>
+    <div className='m-1 rounded border-red-900 border-2 p-1 bg-white'>
         {food && parent=='NewMealPage' || grandparent=='feed' ? (<div>
-                <p>Food Name: {food.name}</p><p>Serving Size: {food.serving}</p><p>Servings: {food_obj.servings}</p><p>Calories: {food.calories * food_obj.servings}</p>
+                <p className='ml-1'>{food.name}<br/> - {food.serving}<br/> - {food_obj.servings} servings<br/> - {food.calories * food_obj.servings} calories</p>
                 </div>) 
             :null
         }
@@ -46,10 +46,17 @@ function Food({ food_obj, deleteFood, parent, handleSave, setFoodServings, grand
 
 
         {food && parent=='MealPage' && grandparent=='MealTracker' ? 
-            (<div>
-                <p>Food Name: {food.name}</p><p>Serving Size: {food.serving}</p><p>Servings: {food_obj.servings}</p><p>Calories: {food.calories * food_obj.servings}</p>
+            (<div className='grid grid-cols-12'>
+                <div className='flex flex-col col-span-11'>
+                    <p>Food Name: {food.name}</p>
+                    <p>Serving Size: {food.serving}</p>
+                    <p>Servings: {food_obj.servings}</p>
+                    <p>Calories: {food.calories * food_obj.servings}</p>
+                </div> 
+                <div className='flex flex-col ml-auto'>
+                <Button className='bg-invisible m-1 text-black hover:bg-red-700 ml-auto'onClick={()=>{deleteFood(food_obj)}}>x</Button>
                 <Dialog>
-                    <DialogTrigger><Button>Edit Food</Button></DialogTrigger>
+                    <DialogTrigger><Button className='bg-invisible m-1 text-black hover:bg-red-700'>Edit</Button></DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
                         <DialogTitle>Edit Servings:</DialogTitle>
@@ -63,8 +70,9 @@ function Food({ food_obj, deleteFood, parent, handleSave, setFoodServings, grand
                         </DialogHeader>
                     </DialogContent>
                     </Dialog>
+                </div>
                 
-                <Button onClick={()=>{deleteFood(food_obj)}}>Delete Food</Button>
+                
             </div>) 
             :null
         }

@@ -24,7 +24,7 @@ function MealTrackerPage() {
       e.preventDefault()
       e.target.reset()
       try{
-        const response = api.post('reviews/', {message:message, meal_id:meal_id})
+        const response = await api.post('reviews/', {message:message, meal_id:meal_id})
         console.log('Created: Review')
         getMeals()
       } catch (error) {
@@ -36,12 +36,12 @@ function MealTrackerPage() {
       getMeals()
     },[])
     return (
-      <>
-      <p>For You</p>
-      <ul>
-        {meals.map(meal => (<li key={meal.id}><Meal meal={meal} parent='feed' grandparent='feed' addReview={handleAddReview} /></li>))}
-      </ul>
-     </>
+      <div className='flex flex-col items-center'>
+        <p className='text-2xl italic font-bold'>For You</p>
+        <ul className='w-full grid grid-cols-1'>
+          {meals.map(meal => (<li key={meal.id}><Meal meal={meal} parent='feed' grandparent='feed' addReview={handleAddReview} /></li>))}
+        </ul>
+     </div>
     )
   }
   

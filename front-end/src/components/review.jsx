@@ -12,9 +12,9 @@ function Review({review}) {
         getReviewAuthor()
     },[])
   return (
-    <div>
-        {reviewAuthor ? <p className='italic'>{reviewAuthor.display_name}</p> : null}
-        <p>{review['message']}</p>
+    <div className='box-border border-t-red-900 p-0 rounded'>
+        {reviewAuthor ? <p className='italic ml-1 underline'>{reviewAuthor.display_name} - {review['datetime_of_review']}</p> : null}
+        <p className='ml-3'> - {review['message']}</p>
     </div>
   )
 }

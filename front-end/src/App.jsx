@@ -10,9 +10,9 @@ function App() {
     console.log('User updated:', user);
   }, [user])
   return (
-    <div className='flex flex-col items-center min-h-screen h-full w-full bg-gradient-to-br from-white to-gray-400 rounded-lg shadow-md relative'>
-      <NavBar user={user} setUser={setUser}/>
-      <Outlet context={{user, setUser}}/>
+    <div className='grid grid-cols-8 items-center min-h-screen h-full w-full bg-gradient-to-br from-white to-gray-400 rounded-lg shadow-md relative'>
+      <NavBar className='cols-span-1' user={user} setUser={setUser}/>
+      <Outlet className='cols-span-7'context={{user, setUser}}/>
     </div>
   )
 }

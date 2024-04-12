@@ -7,6 +7,7 @@ function MealMakerPage() {
     const [load, setLoad] = useState(false)
     const handleMealGen = async (e) => {
       e.preventDefault()
+      e.target.reset()
       console.log(calorieInput)
       setLoad(true)
       const response = await api.post("ai/meal/", {calories:calorieInput})

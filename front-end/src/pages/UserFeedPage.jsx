@@ -22,6 +22,7 @@ function MealTrackerPage() {
 
     const handleAddReview = async (e, message, meal_id) => {
       e.preventDefault()
+      e.target.reset()
       try{
         const response = api.post('reviews/', {message:message, meal_id:meal_id})
         console.log('Created: Review')

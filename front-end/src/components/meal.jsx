@@ -2,12 +2,18 @@ import { api } from "@/utilities"
 import { useState, useEffect } from "react"
 import Food from "./food"
 import { Button } from "./ui/button"
-function Meal({meal, deleteMeal, parent, grandparent}) {
+import Review from "./review"
+function Meal({meal, deleteMeal, parent, grandparent, addReview}) {
     const [foods, setFoods] = useState(meal.food)
-    const [foodServings, setFoodServings]=useState(null)
+    const [foodServings, setFoodServings] = useState(null)
+    const [message, setMessage] = useState('')
+    const [mealUser, setMealUser] = useState({})
+    const reviews = meal['review']
+    console.log('REVIEWS', reviews)
     console.log('MEALFOOD', meal.food)
     console.log("MEAL", meal)
 
+    // delete a food
     const deleteFood = async(food_obj)=>{
       console.log('trying to delete')
       try {
@@ -19,7 +25,7 @@ function Meal({meal, deleteMeal, parent, grandparent}) {
       }
   }
 
-    // moved this up 2 levels so that i could get the meals to re-render when servings are updated
+    // moved this up 2 levels so that i could get the meals to re-render when servings are updated - saves food servings
     const handleSave = async(e, food_obj) => {
       e.preventDefault()
       try{
@@ -37,15 +43,35 @@ function Meal({meal, deleteMeal, parent, grandparent}) {
           console.error('Error saving servings:', error);
   }
   }
+    const getMealUser = async() => {
+      const response = await api.get(`users/info/${meal.user}/`)
+      console.log('MEALUSER: ', response.data)
+      setMealUser(response.data)
+    }
+    useEffect(()=>{
+      getMealUser()
+    },[])
+    
+    // POST to 'review/'
+    // {
+    //    message: 'insert text',
+    //    meal_id: 'insert meal id'
+    // }
+
+
 
   return (
     <div className='border-black border-2'>
         <p>Meal ID: {meal.id}</p>
+        {parent==='feed' ? <p>User: {mealUser['display_name']}</p> : null }
         <p>Date/Time of Meal: {meal.meal_date_time}</p>
         <ul>
             {foods ? foods.map(food_item => <Food key={food_item.id} food_obj={food_item} deleteFood={deleteFood} handleSave={handleSave} setFoodServings={setFoodServings} parent='MealPage' grandparent={grandparent} />): null}
         </ul>
         {parent==='feed' ? null : <Button onClick={()=>{deleteMeal(meal.id)}}>delete</Button>}
+        {parent==='feed' ? <form onSubmit={(e)=>{addReview(e, message, meal.id)}}><input type='text' onChange={(e)=>{setMessage(e.target.value)}}></input><input type='submit' value='>>' className='m-1 p-1 border-2 rounded border-gray-700 bg-gradient-to-br from-orange-500 to-orange-900 text-white'></input></form>: null}
+        {reviews && parent==='feed' ? reviews.map((review_item, idx) => <Review key={idx} review={review_item}/>) : null }
+
     </div>
   )
 }

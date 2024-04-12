@@ -14,6 +14,23 @@ function MealTrackerPage() {
       return response.data
     }
 
+    // POST to 'review/'
+    // {
+    //    message: 'insert text',
+    //    meal_id: 'insert meal id'
+    // }
+
+    const handleAddReview = async (e, message, meal_id) => {
+      e.preventDefault()
+      try{
+        const response = api.post('reviews/', {message:message, meal_id:meal_id})
+        console.log('Created: Review')
+        getMeals()
+      } catch (error) {
+        console.error('Error creating review:', error);
+      }
+    }
+
     useEffect(()=>{
       getMeals()
     },[])
@@ -21,7 +38,7 @@ function MealTrackerPage() {
       <>
       <p>For You</p>
       <ul>
-        {meals.map(meal => (<li key={meal.id}><Meal meal={meal} parent='feed' grandparent='feed' /></li>))}
+        {meals.map(meal => (<li key={meal.id}><Meal meal={meal} parent='feed' grandparent='feed' addReview={handleAddReview} /></li>))}
       </ul>
      </>
     )

@@ -8,3 +8,13 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = '__all__'
+
+
+class ReviewViewSerializer(serializers.ModelSerializer):
+    datetime_of_review = serializers.DateTimeField(
+        format="%A, %B %d, %Y %H:%M")
+
+    class Meta:
+
+        model = Review
+        fields = '__all__'

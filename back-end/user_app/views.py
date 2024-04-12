@@ -86,3 +86,9 @@ class Info(TokenReq):
             return Response({'Failed': 'Password confirmation did not match existing password'}, status=HTTP_400_BAD_REQUEST)
         else:
             return Response({'Failed': 'You must input a new password'}, status=HTTP_400_BAD_REQUEST)
+
+
+class User_Info(TokenReq):
+    def get(self, request, user_id):
+        user = UserAccount.objects.get(id=user_id)
+        return Response({'display_name': user.display_name}, status=HTTP_200_OK)

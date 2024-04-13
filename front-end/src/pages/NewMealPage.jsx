@@ -12,12 +12,14 @@ import {
   } from "@/components/ui/dialog"
 import Food from "@/components/food"
 import { Button } from "@/components/ui/button"
+import { useNavigate } from 'react-router-dom'
   
 /* eslint-disable react/no-unescaped-entities */
 function NewMealPage() {
     const [searchResults, setSearchResults] = useState([])
     const [myFoods, setMyFoods] = useState([])
     const [servings, setServings] = useState()
+    const navigate = useNavigate()
    
     
    // below functions relate to the search function
@@ -67,7 +69,8 @@ function NewMealPage() {
         try{
             console.log(myFoods)
             const response = api.post('meals/', {foods: myFoods})
-            setMyFoods([])}
+            setMyFoods([])
+            navigate('/meals/')}
         catch (error) {
             console.error('Error creating meal:', error);
         }
@@ -95,7 +98,7 @@ function NewMealPage() {
                                 <DialogDescription>
                                     How many servings?
                                     <form onSubmit={(e) => { handleAddFood(e, foodFromSearch[idx+1]) }}>
-                                        <input className='border-2 rounded border-gray-300 mr-1 focus:border-red-700' onChange={(e)=>{setServings(e.target.value)}}type='number'></input>
+                                        <input className='border-2 rounded border-gray-300 mr-1 focus:border-red-700' onChange={(e)=>{setServings(e.target.value)}}type='number' min='0'></input>
                                         <input type='submit' value='add' className='border-2 rounded border-gray-700 bg-gradient-to-br from-red-500 to-red-900 text-white'></input>
                                     </form>
                                 </DialogDescription>

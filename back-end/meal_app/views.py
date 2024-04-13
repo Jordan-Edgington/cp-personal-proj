@@ -32,7 +32,7 @@ class MyMealView(TokenReq):
     def get(self, request):
         data = request.data.copy()
         meals = MealViewSerializer(Meal.objects.filter(
-            user=request.user), many=True)
+            user=request.user).order_by('-meal_date_time'), many=True)
         if meals:
             return Response(meals.data, status=HTTP_200_OK)
         return Response({"Failure": "Could not get meals"}, status=HTTP_400_BAD_REQUEST)

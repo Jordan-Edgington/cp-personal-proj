@@ -65,7 +65,7 @@ class Login(APIView):
             print('token:', token[0].key)
             _response = Response(
                 {'Email': user.email, 'Display Name': user.display_name}, status=HTTP_200_OK)
-            return create_http_only_cookie_on_response(_response, token)
+            return create_http_only_cookie_on_response(_response, token[0])
         else:
             print('failed')
             return Response(

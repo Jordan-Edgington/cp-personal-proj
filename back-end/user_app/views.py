@@ -23,9 +23,11 @@ from .utilities import HttpOnlyAuthentication
 def create_http_only_cookie_on_response(_response, token):
     life_time = datetime.now() + timedelta(days=1)
     format_life_time = life_time.strftime("%a,%d %b $Y %H:%M:%S EST")
+    print('test1')
 
     _response.set_cookie(key="token", value=token.key, httponly=True,
                          secure=True, samesite='Lax', expires=format_life_time)
+    print('test2')
     return _response
 
 

@@ -30,13 +30,18 @@ CSRF_TRUSTED_ORIGINS = ['https://munch-memo.duckdns.org']
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:5173",
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    'https://munch-memo.duckdns.org'
+]
+SESSION_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = 'user_app.UserAccount'
+
+SESSION_COOKIE_HTTPONLY = True
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 

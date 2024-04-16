@@ -16,8 +16,8 @@ function SignupPage() {
             if (response.status === 201) {
                   const { Token } = response.data
                   console.log('successfully signed up, user info', response.data)
-                  localStorage.setItem("token", Token)
-                  api.defaults.headers.common["Authorization"] = `Token ${Token}`
+                  // localStorage.setItem("token", Token)
+                  // api.defaults.headers.common["Authorization"] = `Token ${Token}`
                   console.log('Added token to localstorage and auth header.')
                   setUser({email:response.data.Email, display_name:response.data['Display Name']})
                   navigate('/')

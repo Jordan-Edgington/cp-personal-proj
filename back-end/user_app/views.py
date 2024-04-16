@@ -14,7 +14,19 @@ from rest_framework.status import (
     HTTP_400_BAD_REQUEST
 )
 from rest_framework.authtoken.models import Token
+from datetime import datetime, timedelta
+from .utilities import HttpOnlyAuthentication
+
 # Create your views here.
+
+
+def create_http_only_cookie_on_response(_response, token):
+    life_time = datetime.now() + timedelta(days=1)
+    format_life_time = life_time.strftime("%a,%d %b $Y %H:%M:%S EST")
+
+    _response.set_cookie(key="token", value=token.key, httponly=True,
+                         secure=True, samesite='Lax', expires=format_life_time)
+    return _response
 
 
 class Signup(APIView):
@@ -28,9 +40,9 @@ class Signup(APIView):
             user.save()
             login(request, user)
             token = Token.objects.create(user=user)
-            return Response(
-                {'Email': user.email, 'Display Name': user.display_name, 'Token': token.key}, status=HTTP_201_CREATED
-            )
+            _response = Response(
+                {'Email': user.email, 'Display Name': user.display_name}, status=HTTP_201_CREATED)
+            return create_http_only_cookie_on_response(_response, token)
         except ValidationError as error:
             print(error)
             return Response(error, status=HTTP_400_BAD_REQUEST)
@@ -47,9 +59,9 @@ class Login(APIView):
             login(request, user)
             token = Token.objects.get_or_create(user=user)
             print('token:', token[0].key)
-            return Response(
-                {'Email': user.email, 'Display Name': user.display_name, 'Token': token[0].key}, status=HTTP_200_OK
-            )
+            _response = Response(
+                {'Email': user.email, 'Display Name': user.display_name}, status=HTTP_200_OK)
+            return create_http_only_cookie_on_response(_response, token)
         else:
             print('failed')
             return Response(
@@ -62,14 +74,19 @@ class TokenReq(APIView):
     permission_classes = [IsAuthenticated]
 
 
-class Logout(TokenReq):
+class HttpOnlyReq(APIView):
+    authentication_classes = [HttpOnlyAuthentication]
+    permission_classes = [IsAuthenticated]
+
+
+class Logout(HttpOnlyReq):
     def post(self, request):
         request.user.auth_token.delete()
         logout(request)
         return Response(status=HTTP_204_NO_CONTENT)
 
 
-class Info(TokenReq):
+class Info(HttpOnlyReq):
     def get(self, request):
         return Response(
             {'email': request.user.email, 'display_name': request.user.display_name}, status=HTTP_200_OK)
@@ -88,7 +105,7 @@ class Info(TokenReq):
             return Response({'Failed': 'You must input a new password'}, status=HTTP_400_BAD_REQUEST)
 
 
-class User_Info(TokenReq):
+class User_Info(HttpOnlyReq):
     def get(self, request, user_id):
         user = UserAccount.objects.get(id=user_id)
         return Response({'display_name': user.display_name}, status=HTTP_200_OK)

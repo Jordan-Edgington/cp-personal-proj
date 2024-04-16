@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from user_app.views import TokenReq
+from user_app.views import TokenReq, HttpOnlyReq
 from food_proj.settings import env
 from rest_framework.status import (
     HTTP_200_OK,
@@ -14,7 +14,7 @@ from openai import OpenAI
 OPENAI_SECRET_KEY = env.get('OPENAI_SECRET_KEY')
 
 
-class Meal_Gen(TokenReq):
+class Meal_Gen(HttpOnlyReq):
     def post(self, request):
         try:
             data = request.data.copy()
@@ -39,6 +39,6 @@ class Meal_Gen(TokenReq):
             return Response("An error occurred", status=HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-class New_Meal(TokenReq):
+class New_Meal(HttpOnlyReq):
     def post(self, request):
         pass

@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.core.exceptions import ValidationError
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from user_app.views import TokenReq
+from user_app.views import TokenReq, HttpOnlyReq
 from food_proj.settings import env
 from .models import Food
 import requests
@@ -15,7 +15,7 @@ from rest_framework.status import (
 )
 
 
-class FatSecretFoodByID(TokenReq):
+class FatSecretFoodByID(HttpOnlyReq):
     def post(self, request, id):
         token_url = 'https://oauth.fatsecret.com/connect/token'
         client_id = env.get('FATSECRET_CLIENT_ID')
@@ -42,7 +42,7 @@ class FatSecretFoodByID(TokenReq):
         return Response(new_response, status=HTTP_200_OK)
 
 
-class FatSecretFoodSearch(TokenReq):
+class FatSecretFoodSearch(HttpOnlyReq):
     def post(self, request, search):
         token_url = 'https://oauth.fatsecret.com/connect/token'
         client_id = env.get('FATSECRET_CLIENT_ID')
@@ -73,7 +73,7 @@ class FatSecretFoodSearch(TokenReq):
         return Response(new_foods_response, status=HTTP_200_OK)
 
 
-class AFood(TokenReq):
+class AFood(HttpOnlyReq):
     def post(self, request, food_id):
         print(request.data)
         food = get_object_or_404(Food, id=food_id)

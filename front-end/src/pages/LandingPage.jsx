@@ -25,8 +25,8 @@ function LandingPage() {
           if (response.status === 200) {
             const { Token } = response.data
             console.log('successfully logged in, user info', response.data)
-            api.defaults.headers.common["Authorization"] = `Token ${Token}`
-            localStorage.setItem("token", Token)
+            // api.defaults.headers.common["Authorization"] = `Token ${Token}`
+            // localStorage.setItem("token", Token)
             console.log('Added token to localstorage and auth header.')
             setUser({email:response.data.Email, display_name:response.data['Display Name']})
           } 

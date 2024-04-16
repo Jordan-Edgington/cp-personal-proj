@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.core.exceptions import ValidationError
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from user_app.views import TokenReq
+from user_app.views import TokenReq, HttpOnlyReq
 from food_proj.settings import env
 from rest_framework.status import (
     HTTP_200_OK,
@@ -28,7 +28,7 @@ from meal_app.models import Meal
 '''
 
 
-class MyMealView(TokenReq):
+class MyMealView(HttpOnlyReq):
     def get(self, request):
         data = request.data.copy()
         meals = MealViewSerializer(Meal.objects.filter(
@@ -62,14 +62,14 @@ class MyMealView(TokenReq):
         return Response({"Success": "Meal Created"}, status=HTTP_201_CREATED)
 
 
-class AMealView(TokenReq):
+class AMealView(HttpOnlyReq):
     def delete(self, request, meal_id):
         meal = get_object_or_404(Meal, id=meal_id)
         meal.delete()
         return Response(status=HTTP_204_NO_CONTENT)
 
 
-class AllMealsView(TokenReq):
+class AllMealsView(HttpOnlyReq):
     def get(self, request):
         meals = Meal.objects.order_by('-meal_date_time').all()
         serializer = MealViewSerializer(meals, many=True)

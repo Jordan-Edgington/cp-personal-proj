@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from user_app.models import UserAccount
 from meal_app.models import Meal
 from .serializers import ReviewSerializer
-from user_app.views import TokenReq
+from user_app.views import TokenReq, HttpOnlyReq
 from food_proj.settings import env
 from rest_framework.status import (
     HTTP_200_OK,
@@ -17,7 +17,7 @@ from datetime import datetime
 # Create your views here.
 
 
-class Review(TokenReq):
+class Review(HttpOnlyReq):
     def post(self, request):
         '''
         POST to 'review/'

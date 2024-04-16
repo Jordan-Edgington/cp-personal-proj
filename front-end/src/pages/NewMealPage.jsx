@@ -68,7 +68,7 @@ function NewMealPage() {
     const handleAddMeal = async() => {
         try{
             console.log(myFoods)
-            const response = api.post('meals/', {foods: myFoods})
+            const response = await api.post('meals/', {foods: myFoods})
             setMyFoods([])
             navigate('/meals/')}
         catch (error) {

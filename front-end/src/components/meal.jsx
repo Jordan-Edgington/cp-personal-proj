@@ -17,7 +17,7 @@ function Meal({meal, deleteMeal, parent, grandparent, addReview}) {
     const deleteFood = async(food_obj)=>{
       console.log('trying to delete')
       try {
-          const response = api.delete(`foods/myfood/${food_obj.id}/`)
+          const response = await api.delete(`foods/myfood/${food_obj.id}/`)
           console.log(response.data)
           setFoods(foods.filter(food=> food.id !== food_obj.id))
       } catch (error) {

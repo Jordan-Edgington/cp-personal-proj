@@ -6,13 +6,11 @@ import { useState } from "react"
 function NavBar({user, setUser}) {
   const navigate = useNavigate()
 
-  const handleLogOut = () => {
+  const handleLogOut = async() => {
     setUser(null)
-    localStorage.removeItem('token')
-    delete api.defaults.headers.common['Authorization']
+    const response = await api.post('users/logout/')
     console.log('logging out')
     navigate('/')
-
   }
 
   return (

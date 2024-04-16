@@ -16,8 +16,8 @@ function MealTrackerPage() {
 
 
 
-    const handleDeleteMeal = (id) => {
-      const resp = api.delete(`/meals/${id}`)
+    const handleDeleteMeal = async (id) => {
+      const resp = await api.delete(`/meals/${id}`)
       const updatedMeals = meals.filter(meal => meal.id !== id);
       setMeals(updatedMeals)
       console.log("meal deleted")

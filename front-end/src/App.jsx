@@ -6,8 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 
 
 function App() {
-  // const [user, setUser] = useState(useLoaderData)
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(useLoaderData())
 
   useEffect(() => {
     console.log('User updated:', user);

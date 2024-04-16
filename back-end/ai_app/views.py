@@ -22,7 +22,7 @@ class Meal_Gen(TokenReq):
             calories = data['calories']
             from openai import OpenAI
             print('test1')
-            client = OpenAI()
+            client = OpenAI(api_key=OPENAI_SECRET_KEY)
             print('test2')
             completion = client.chat.completions.create(
                 model="gpt-3.5-turbo",

@@ -11,6 +11,7 @@ function LandingPage() {
   const navigate = useNavigate(); // Initialize navigate using useNavigate
   
   useEffect(() => {
+    console.log(user)
     if (user) {
       navigate('/feed/');
     }

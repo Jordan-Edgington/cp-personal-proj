@@ -26,6 +26,8 @@ SECRET_KEY = env.get('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+CSRF_TRUSTED_ORIGINS = ['https://munch-memo.duckdns.org/']
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 # CORS_ALLOWED_ORIGINS = [

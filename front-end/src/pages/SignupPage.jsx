@@ -20,11 +20,9 @@ function SignupPage() {
                   api.defaults.headers.common["Authorization"] = `Token ${Token}`
                   console.log('Added token to localstorage and auth header.')
                   setUser({email:response.data.Email, display_name:response.data['Display Name']})
+                  navigate('/')
       }}
-      useEffect(() => {
-            if (!user) {
-              navigate('/')
-            }}, [user])
+
   return (
    <>
    <div className='flex flex-col justify-center items-center text-center w-1/2 m-24'>

@@ -64,7 +64,7 @@ function Food({ food_obj, deleteFood, parent, handleSave, setFoodServings, grand
                             How many servings?
                             <form onSubmit={(e) => { handleSave(e, food_obj) }}>
                                 <input className='border-2 rounded border-gray-300 mr-1' onChange={(e)=>{setFoodServings(e.target.value)}}type='number'></input>
-                                <input type='submit' value='Save' className='border-2 rounded border-gray-700 bg-gradient-to-br from-orange-500 to-orange-900 text-white'></input>
+                                <input type='submit' value='Save' className='border-2 rounded border-gray-700 bg-gradient-to-br from-red-500 to-red-900 text-white'></input>
                             </form>
                         </DialogDescription>
                         </DialogHeader>

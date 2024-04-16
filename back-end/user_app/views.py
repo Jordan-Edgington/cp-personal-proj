@@ -26,7 +26,7 @@ def create_http_only_cookie_on_response(_response, token):
     print('test1')
     try:
         _response.set_cookie(key="token", value=token.key, httponly=True,
-                             secure=True, samesite=None, expires=format_life_time)
+                             secure=True, samesite='Lax', expires=format_life_time)
         print('test2')
         return _response
     except Exception as e:

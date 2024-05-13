@@ -16,7 +16,7 @@ Munch Memo is built with React w/ Javascript to make the front-end and Django w/
 
 <img src="./MunchMemoDB.png"/>
 
-> Deployment
+> Deployment (See branch: deploy-cookie)
 
 Munch Memo is securely deployed on an AWS EC2 instance with an SSL certificate ensuring encrypted connections. Token authentication via cookies enhances security, safeguarding user authentication details.
 

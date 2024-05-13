@@ -12,9 +12,13 @@ We were required to create an application that utilizes two external APIs and ha
 
 > Architecture
 
-Munch memo is built with React w/ Javascript to make the front-end and Django w/ Django Rest Framework and a PostgreSQL database to make the back-end.
+Munch Memo is built with React w/ Javascript to make the front-end and Django w/ Django Rest Framework and a PostgreSQL database to make the back-end.
 
 <img src="./MunchMemoDB.png"/>
+
+> Deployment
+
+Munch Memo is securely deployed on an AWS EC2 instance with an SSL certificate ensuring encrypted connections. Token authentication via cookies enhances security, safeguarding user authentication details.
 
 ## Founders
 

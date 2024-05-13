@@ -8,7 +8,7 @@ Munch Memo is an educational project designed to allow users to keep track of ho
 
 > Requirements
 
-We were required to create an application that utilizes two external APIs and has two CRUDable sources (not including user authentication). Here users are able to perform CRUD capabilities on the Meals they have eaten by adding/delete meals, and updating the servings of foods in those meals. Additionally, users can perform CRUD capabilities on other User's meals by commenting on their meals.
+We were required to create an application that utilizes two external APIs and has two CRUDable sources (not including user authentication). Here users are able to perform CRUD capabilities on the Meals they have eaten by adding/deleting meals, and updating the servings of foods in those meals. Additionally, users can perform CRUD capabilities on other User's meals by commenting on their meals.
 
 > Architecture
 

@@ -25,8 +25,14 @@ def create_http_only_cookie_on_response(_response, token):
     format_life_time = life_time.strftime("%a,%d %b $Y %H:%M:%S EST")
     print('test1')
     try:
-        _response.set_cookie(key="token", value=token.key, httponly=True,
-                             secure=True, samesite='Lax', expires=format_life_time)
+        _response.set_cookie(
+            key="token",
+            value=token.key,
+            httponly=True,
+            secure=True,
+            samesite='Lax',
+            expires=format_life_time
+        )
         print('test2')
         return _response
     except Exception as e:

@@ -2,7 +2,7 @@
 
 > CP Whiskey Platoon Personal Capstone Project
 
-Munch Memo is an educational project designed to allow users to keep track of how many calories they are consuming. It uses [FatSecret API](https://platform.fatsecret.com/platform-api) to keep track of the calories, and [OpenAI API](https://platform.openai.com/) to allow users to generate meals based on a desired calorie count.
+Munch Memo is an educational project designed to allow users to keep track of how many calories they are consuming. It uses [FatSecret API](https://platform.fatsecret.com/platform-api) to keep track of the calories, and [OpenAI API](https://platform.openai.com/) to allow users to generate meals based on a desired calorie count. It also allows users to view the meals of other users and to comment on these meals.
 
 ## Requirements and Architecture
 

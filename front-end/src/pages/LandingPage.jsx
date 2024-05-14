@@ -9,6 +9,7 @@ function LandingPage() {
   const [passwordInput, setPasswordInput] = useState('')
   const {user, setUser} = useOutletContext()
   const navigate = useNavigate(); // Initialize navigate using useNavigate
+  const [loginError, setLoginError] = useState('')
   
   useEffect(() => {
     console.log(user)
@@ -24,7 +25,6 @@ function LandingPage() {
         try {
           const response = await api.post("users/login/",{email:emailInput, password:passwordInput})
           if (response.status === 200) {
-            const { Token } = response.data
             console.log('successfully logged in, user info', response.data)
             // api.defaults.headers.common["Authorization"] = `Token ${Token}`
             // localStorage.setItem("token", Token)
@@ -32,8 +32,7 @@ function LandingPage() {
             setUser({email:response.data.Email, display_name:response.data['Display Name']})
           } 
         } catch (error) {
-            console.error('Unable to log in. Improper credentials provided', error)
-            alert('Unable to log in. Improper credentials provided')
+            setLoginError(error.response.data.message)
       }
     }
 
@@ -54,6 +53,7 @@ function LandingPage() {
             </div>
             <div>
               <input type='submit' value='Log In' className='bg-red-900 border-2 border-black rounded p-1 text-white'/>
+              <p className='italic'>{loginError}</p>
               <p>Don't have an account? Click <Link className='text-red-900 hover:underline' to='signup/'>here</Link> to sign up.</p>
             </div>
           </form>

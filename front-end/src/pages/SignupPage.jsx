@@ -7,21 +7,29 @@ function SignupPage() {
       const [displayNameInput, setDisplayNameInput] = useState('')
       const [passwordInput, setPasswordInput] = useState('')
       const {user, setUser } = useOutletContext()
+      const [signupError, setSignupError] = useState('')
+
 
       const navigate = useNavigate()
 
       const handleSignupForm = async(e) => {
             e.preventDefault()
-            const response = await api.post("users/signup/",{email:emailInput, display_name:displayNameInput, password:passwordInput})
-            if (response.status === 201) {
-                  const { Token } = response.data
-                  console.log('successfully signed up, user info', response.data)
-                  // localStorage.setItem("token", Token)
-                  // api.defaults.headers.common["Authorization"] = `Token ${Token}`
-                  console.log('Added token to localstorage and auth header.')
-                  setUser({email:response.data.Email, display_name:response.data['Display Name']})
-                  navigate('/')
-      }}
+            try{
+                  const response = await api.post("users/signup/",{email:emailInput, display_name:displayNameInput, password:passwordInput})
+                  if (response.status === 201) {
+                        console.log('successfully signed up, user info', response.data)
+                        // localStorage.setItem("token", Token)
+                        // api.defaults.headers.common["Authorization"] = `Token ${Token}`
+                        console.log('Added token to localstorage and auth header.')
+                        setUser({email:response.data.Email, display_name:response.data['Display Name']})
+                        navigate('/')
+                  }
+            } catch (error) {
+                  console.log(error)
+                  setSignupError(error.response.data.message)
+            }
+      }
+
 
   return (
    <>
@@ -42,6 +50,7 @@ function SignupPage() {
           </div>
           <div>
                 <input type='submit' value='Sign Up' className='bg-orange-900 border-2 border-black rounded p-1 text-white focus:border-red-700'/>
+                <p className='italic'>{signupError}</p>
           </div>
         </form>
       </div>

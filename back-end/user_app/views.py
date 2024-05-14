@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from django.db import IntegrityError
 from .models import UserAccount
 from django.core.exceptions import ValidationError
 from django.contrib.auth import login, logout, authenticate
@@ -11,7 +12,8 @@ from rest_framework.status import (
     HTTP_200_OK,
     HTTP_204_NO_CONTENT,
     HTTP_201_CREATED,
-    HTTP_400_BAD_REQUEST
+    HTTP_400_BAD_REQUEST,
+    HTTP_500_INTERNAL_SERVER_ERROR
 )
 from rest_framework.authtoken.models import Token
 # Create your views here.
@@ -20,9 +22,10 @@ from rest_framework.authtoken.models import Token
 class Signup(APIView):
     def post(self, request):
         data = request.data.copy()
-        data['username'] = request.data.get('email')
-        user = UserAccount.objects.create_user(**data)
+        email = data.get('email')
+        data['username'] = email  # Assuming email is the username field
         try:
+            user = UserAccount.objects.create_user(**data)
             user.full_clean()
             user.set_password(data.get('password'))
             user.save()
@@ -31,9 +34,24 @@ class Signup(APIView):
             return Response(
                 {'Email': user.email, 'Display Name': user.display_name, 'Token': token.key}, status=HTTP_201_CREATED
             )
-        except ValidationError as error:
-            print(error)
-            return Response(error, status=HTTP_400_BAD_REQUEST)
+        except IntegrityError as error:
+            print("IntegrityError:", str(error))
+            if 'unique constraint' in str(error):
+                messageArr = []
+                if 'username' in str(error):
+                    message = "A user with that email already exists."
+                    messageArr.append(message)
+                    print(message)
+                if 'display_name' in str(error):
+                    message = "A user with that display name already exists."
+                    messageArr.append(message)
+                    print(message)
+                return Response({'message': messageArr}, status=HTTP_400_BAD_REQUEST)
+            else:
+                return Response({'message': "An integrity error occurred."}, status=HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            print("Exception:", e)
+            return Response({'message': "An error occurred during signup."}, status=HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class Login(APIView):
